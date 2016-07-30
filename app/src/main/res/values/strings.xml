@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tabs</string>
+
+    <string name="photos">Photos</string>
+    <string name="songs">Songs</string>
+    <string name="videos">Videos</string>
+</resources>
