@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 class TabView implements View.OnClickListener {
 
     // On Tab Pressed Listener
@@ -17,6 +19,8 @@ class TabView implements View.OnClickListener {
         void onTabPressed(TabView tabView);
     }
 
+
+    private AtomicInteger atomicInteger = new AtomicInteger(1);
 
     private Context context;
     private TabItem tabItem;
@@ -69,6 +73,7 @@ class TabView implements View.OnClickListener {
         selectorParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
         selector = new View(context);
+        selector.setId(generateViewID());
         selector.setLayoutParams(selectorParams);
         selector.setBackgroundColor(selectorColor);
         selector.setVisibility(View.INVISIBLE);
@@ -84,6 +89,7 @@ class TabView implements View.OnClickListener {
         }
 
         textView_title = new TextView(context);
+        textView_title.setId(generateViewID());
         textView_title.setLayoutParams(titleParams);
         textView_title.setGravity(Gravity.CENTER);
         textView_title.setText(tabItem.getText());
@@ -138,6 +144,24 @@ class TabView implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         onTabPressedListener.onTabPressed(this);
+    }
+
+
+    // Generate View ID
+    private int generateViewID() {
+        while (true) {
+            int id = atomicInteger.get();
+            int newID = id + 1;
+
+            // ID number larger than 0x00FFFFFF is reserved for static views defined in the /res xml files
+            if (newID > 0x00FFFFFF) {
+                newID = 1;
+            }
+
+            if (atomicInteger.compareAndSet(id, newID)) {
+                return id;
+            }
+        }
     }
 
 }
