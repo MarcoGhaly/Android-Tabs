@@ -92,6 +92,7 @@ class TabView implements View.OnClickListener {
         textView_title.setId(generateViewID());
         textView_title.setLayoutParams(titleParams);
         textView_title.setGravity(Gravity.CENTER);
+        textView_title.setMaxLines(1);
         textView_title.setText(tabItem.getText());
         textView_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSizeSP);
         textView_title.setTextColor(textColor);

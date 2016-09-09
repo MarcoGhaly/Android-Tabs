@@ -5,5 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="tabsText">@android:color/white</color>
-    <color name="tabsSelector">#FFFFFF</color>
+    <color name="tabsSelector">@android:color/white</color>
 </resources>
