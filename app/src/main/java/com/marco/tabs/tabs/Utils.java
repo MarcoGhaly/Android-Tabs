@@ -5,10 +5,10 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-class Util {
+class Utils {
 
     // Constructor
-    private Util() {
+    private Utils() {
     }
 
 

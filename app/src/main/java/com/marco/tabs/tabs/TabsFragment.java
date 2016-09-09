@@ -132,7 +132,7 @@ public class TabsFragment extends Fragment implements TabView.OnTabPressedListen
     private void createTabs(TabItem[] tabItems, int tabsPerPage, int tabPaddingDP, int fontSizeSP, int textColor,
                             int selectorHeightDP, int selectorColor, int separatorWidthDP, int separatorColor) {
         int tabWidth = (scrollView_tabs.getWidth() - (tabsPerPage - 1)) / tabsPerPage;
-        int separatorVerticalMargin = Util.dpToPx(getActivity(), TABS_SEPARATOR_VERTICAL_MARGIN_DP);
+        int separatorVerticalMargin = Utils.dpToPx(getActivity(), TABS_SEPARATOR_VERTICAL_MARGIN_DP);
 
         // Tabs Parent View
         FrameLayout.LayoutParams tabsLayoutParams =
@@ -161,7 +161,7 @@ public class TabsFragment extends Fragment implements TabView.OnTabPressedListen
 
     // Create Separator
     private View createSeparator(int separatorWidthDP, int separatorColor) {
-        int separatorWidth = Util.dpToPx(getActivity(), separatorWidthDP);
+        int separatorWidth = Utils.dpToPx(getActivity(), separatorWidthDP);
 
         LinearLayout.LayoutParams separatorParams =
                 new LinearLayout.LayoutParams(separatorWidth, LinearLayout.LayoutParams.MATCH_PARENT);

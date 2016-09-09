@@ -10,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.marco.tabs.R;
-
 class TabView implements View.OnClickListener {
 
     // On Tab Pressed Listener
@@ -55,8 +53,8 @@ class TabView implements View.OnClickListener {
 
     // Initialize Views
     private void initViews() {
-        int padding = Util.dpToPx(context, paddingDP);
-        int selectorHeight = Util.dpToPx(context, selectorHeightDP);
+        int padding = Utils.dpToPx(context, paddingDP);
+        int selectorHeight = Utils.dpToPx(context, selectorHeightDP);
 
 
         // Parent Layout
@@ -71,7 +69,6 @@ class TabView implements View.OnClickListener {
         selectorParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
         selector = new View(context);
-        selector.setId(R.id.tab_selector);
         selector.setLayoutParams(selectorParams);
         selector.setBackgroundColor(selectorColor);
         selector.setVisibility(View.INVISIBLE);
@@ -87,7 +84,6 @@ class TabView implements View.OnClickListener {
         }
 
         textView_title = new TextView(context);
-        textView_title.setId(R.id.tab_text);
         textView_title.setLayoutParams(titleParams);
         textView_title.setGravity(Gravity.CENTER);
         textView_title.setText(tabItem.getText());
