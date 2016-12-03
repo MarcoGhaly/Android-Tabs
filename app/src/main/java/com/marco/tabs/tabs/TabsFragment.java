@@ -77,6 +77,8 @@ public class TabsFragment extends Fragment implements TabView.OnTabPressedListen
 
     private int selectedTabIndex;
 
+    private int tabsPerPage;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,7 +104,7 @@ public class TabsFragment extends Fragment implements TabView.OnTabPressedListen
 
         Bundle arguments = getArguments();
         final TabItem[] tabItems = (TabItem[]) arguments.getSerializable(ARGUMENT_TAB_ITEMS);
-        final int tabsPerPage = arguments.getInt(ARGUMENT_TABS_PER_PAGE);
+        tabsPerPage = arguments.getInt(ARGUMENT_TABS_PER_PAGE);
         final int tabPaddingDP = arguments.getInt(ARGUMENT_TAB_PADDING);
         final int fontSizeSP = arguments.getInt(ARGUMENT_FONT_SIZE);
         final int textColor = arguments.getInt(ARGUMENT_TEXT_COLOR);
@@ -192,9 +194,15 @@ public class TabsFragment extends Fragment implements TabView.OnTabPressedListen
 
     // Set Selected Tab
     public void setSelectedTab(int index) {
-        selectedTabIndex = index;
-        for (int i = 0; i < tabViews.length; i++) {
-            tabViews[i].setSelected(i == index);
+        if (index != selectedTabIndex) {
+            for (int i = 0; i < tabViews.length; i++) {
+                tabViews[i].setSelected(i == index);
+            }
+
+            if (tabViews.length > tabsPerPage) {
+                scroll(index, selectedTabIndex);
+            }
+            selectedTabIndex = index;
         }
     }
 
@@ -204,11 +212,39 @@ public class TabsFragment extends Fragment implements TabView.OnTabPressedListen
         for (int i = 0; i < tabViews.length; i++) {
             boolean selected = tabView == tabViews[i];
             tabViews[i].setSelected(selected);
-            if (selected) {
+            if (selected && i != selectedTabIndex) {
+                if (tabViews.length > tabsPerPage) {
+                    scroll(i, selectedTabIndex);
+                }
                 selectedTabIndex = i;
                 onTabSelectedListener.onTabSelected(i);
             }
         }
+    }
+
+
+    // Scroll
+    private void scroll(final int index, final int oldIndex) {
+        scrollView_tabs.post(new Runnable() {
+            @Override
+            public void run() {
+                int left;
+
+                if (index < (tabsPerPage + 1) / 2) {
+                    left = 0;
+                } else if (index > tabViews.length - (tabsPerPage + 1) / 2) {
+                    left = tabViews[tabViews.length - 1].getView().getRight();
+                } else {
+                    int leftTabIndex = index - tabsPerPage / 2;
+                    if (tabsPerPage % 2 == 0 && oldIndex > index) {
+                        leftTabIndex++;
+                    }
+                    left = tabViews[leftTabIndex].getView().getLeft();
+                }
+
+                scrollView_tabs.scrollTo(left, 0);
+            }
+        });
     }
 
 }
