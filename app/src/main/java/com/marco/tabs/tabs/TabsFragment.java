@@ -12,8 +12,6 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
-import com.marco.tabs.R;
-
 public class TabsFragment extends Fragment implements TabView.OnTabPressedListener {
 
     // On Tab Selected Listener
@@ -90,18 +88,21 @@ public class TabsFragment extends Fragment implements TabView.OnTabPressedListen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        scrollView_tabs = new HorizontalScrollView(getActivity());
+        scrollView_tabs.setLayoutParams(layoutParams);
+        scrollView_tabs.setHorizontalScrollBarEnabled(false);
+        scrollView_tabs.setVerticalScrollBarEnabled(false);
 
-        initViews(rootView);
+        initViews();
 
-        return rootView;
+        return scrollView_tabs;
     }
 
 
     // Initialize Views
-    private void initViews(View rootView) {
-        scrollView_tabs = (HorizontalScrollView) rootView.findViewById(R.id.scrollView_tabs);
-
+    private void initViews() {
         Bundle arguments = getArguments();
         final TabItem[] tabItems = (TabItem[]) arguments.getSerializable(ARGUMENT_TAB_ITEMS);
         tabsPerPage = arguments.getInt(ARGUMENT_TABS_PER_PAGE);
