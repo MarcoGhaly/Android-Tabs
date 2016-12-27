@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.marco.tabs.TabsActivity">
 
-    <FrameLayout
-        android:id="@+id/layout_tabs"
+    <com.marco.tabs.tabs.TabsView
+        android:id="@+id/view_tabs"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/black" />
+        android:background="@android:color/black"
+        app:selectorColor="@android:color/white"
+        app:selectorHeight="4dp"
+        app:separatorColor="@android:color/white"
+        app:separatorWidth="0dp"
+        app:tabPadding="8dp"
+        app:tabsPerPage="3"
+        app:textColor="@android:color/white"
+        app:textSize="15sp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/layout_tabs" />
+        android:layout_below="@id/view_tabs" />
 
 </RelativeLayout>

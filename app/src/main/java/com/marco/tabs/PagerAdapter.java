@@ -4,36 +4,37 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.marco.tabs.tabs.TabItem;
-
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    private TabItem[] tabItems;
+    private String[] titles;
+    private int[] iconsResourceIDs;
+
     private ContentFragment[] contentFragments;
 
 
     // Constructor
-    public PagerAdapter(FragmentManager fragmentManager, TabItem[] tabItems) {
+    public PagerAdapter(FragmentManager fragmentManager, String[] titles, int[] iconsResourceIDs) {
         super(fragmentManager);
 
-        this.tabItems = tabItems;
-        contentFragments = new ContentFragment[tabItems.length];
+        this.titles = titles;
+        this.iconsResourceIDs = iconsResourceIDs;
+        contentFragments = new ContentFragment[titles.length];
+    }
+
+
+    @Override
+    public int getCount() {
+        return titles.length;
     }
 
 
     @Override
     public Fragment getItem(int position) {
         if (contentFragments[position] == null) {
-            TabItem tabItem = tabItems[position];
-            contentFragments[position] = ContentFragment.newInstance(tabItem.getIconID(), tabItem.getText());
+            contentFragments[position] = ContentFragment.newInstance(iconsResourceIDs[position], titles[position]);
         }
 
         return contentFragments[position];
-    }
-
-    @Override
-    public int getCount() {
-        return tabItems.length;
     }
 
 }

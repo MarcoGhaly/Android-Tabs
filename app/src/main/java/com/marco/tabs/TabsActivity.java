@@ -1,25 +1,18 @@
 package com.marco.tabs;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.graphics.Color;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.marco.tabs.tabs.TabItem;
-import com.marco.tabs.tabs.TabsFragment;
+import com.marco.tabs.tabs.TabsAdapter;
+import com.marco.tabs.tabs.TabsView;
 
-public class TabsActivity extends AppCompatActivity implements TabsFragment.OnTabSelectedListener {
+public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSelectedListener {
 
-    private static final String TAG_TABS_FRAGMENT = "Tabs Fragment";
+    private String[] titles;
+    private int[] iconsResourceIDs;
 
-
-    private TabItem[] tabItems;
-
-    private TabsFragment tabsFragment;
-
+    private TabsView tabsView;
     private ViewPager viewPager;
 
 
@@ -28,50 +21,28 @@ public class TabsActivity extends AppCompatActivity implements TabsFragment.OnTa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
 
-        tabItems = new TabItem[3];
-        tabItems[0] = new TabItem(R.drawable.photos_selected, getString(R.string.photos));
-        tabItems[1] = new TabItem(R.drawable.songs_selected, getString(R.string.songs));
-        tabItems[2] = new TabItem(R.drawable.videos_selected, getString(R.string.videos));
+        titles = new String[3];
+        titles[0] = getString(R.string.photos);
+        titles[1] = getString(R.string.songs);
+        titles[2] = getString(R.string.videos);
 
-        initTabsFragments();
-        initContentFragments();
+        iconsResourceIDs = new int[3];
+        iconsResourceIDs[0] = R.drawable.photos_selected;
+        iconsResourceIDs[1] = R.drawable.songs_selected;
+        iconsResourceIDs[2] = R.drawable.videos_selected;
+
+        initViews();
     }
 
 
-    // Initialize Fragments
-    private void initTabsFragments() {
-        FragmentManager fragmentManager = getFragmentManager();
-        tabsFragment = (TabsFragment) fragmentManager.findFragmentByTag(TAG_TABS_FRAGMENT);
+    // Initialize Views
+    private void initViews() {
+        tabsView = (TabsView) findViewById(R.id.view_tabs);
+        tabsView.setAdapter(tabsAdapter);
+        tabsView.setOnTabSelectedListener(this);
 
-        if (tabsFragment == null) {
-            int textColor;
-            int selectorColor;
-            int separatorColor = Color.TRANSPARENT;
-
-            if (Build.VERSION.SDK_INT >= 23) {
-                textColor = getColor(R.color.tabsText);
-                selectorColor = getColor(R.color.tabsSelector);
-            } else {
-                textColor = getResources().getColor(R.color.tabsText);
-                selectorColor = getResources().getColor(R.color.tabsSelector);
-            }
-
-            tabsFragment = TabsFragment.newInstance(tabItems, 3, 5, 15, textColor, 2, selectorColor, 0, separatorColor);
-
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.layout_tabs, tabsFragment, TAG_TABS_FRAGMENT);
-            fragmentTransaction.commit();
-        }
-
-        tabsFragment.setOnTabSelectedListener(this);
-    }
-
-
-    // Initialize Content Fragments
-    private void initContentFragments() {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-
-        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabItems);
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), titles, iconsResourceIDs);
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(simpleOnPageChangeListener);
     }
@@ -87,8 +58,29 @@ public class TabsActivity extends AppCompatActivity implements TabsFragment.OnTa
     private ViewPager.SimpleOnPageChangeListener simpleOnPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
-            tabsFragment.setSelectedTab(position);
+            tabsView.setSelectedTab(position);
         }
+    };
+
+
+    // Tabs Adapter
+    private TabsAdapter tabsAdapter = new TabsAdapter() {
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public String getTitle(int position) {
+            return titles[position];
+        }
+
+        @Override
+        public int getIconResourceID(int position) {
+            return iconsResourceIDs[position];
+        }
+
     };
 
 }

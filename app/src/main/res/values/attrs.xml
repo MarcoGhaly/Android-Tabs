@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TabsView">
+        <attr name="tabsPerPage" format="integer" />
+        <attr name="tabPadding" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="selectorHeight" format="dimension" />
+        <attr name="selectorColor" format="color" />
+        <attr name="separatorWidth" format="dimension" />
+        <attr name="separatorColor" format="color" />
+    </declare-styleable>
+</resources>
