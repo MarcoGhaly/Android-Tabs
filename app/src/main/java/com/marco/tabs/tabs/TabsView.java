@@ -29,7 +29,10 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
     private int selectedTabIndex;
 
     private int tabsPerPage;
-    private int tabPadding;
+    private int tabPaddingTop;
+    private int tabPaddingBottom;
+    private int tabPaddingLeft;
+    private int tabPaddingRight;
     private int textSize;
     private int textColor;
     private int selectorHeight;
@@ -51,7 +54,11 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
 
         try {
             tabsPerPage = typedArray.getInteger(R.styleable.TabsView_tabsPerPage, 0);
-            tabPadding = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPadding, 0);
+            int tabPadding = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPadding, 0);
+            tabPaddingTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingTop, tabPadding);
+            tabPaddingBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingBottom, tabPadding);
+            tabPaddingLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingLeft, tabPadding);
+            tabPaddingRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingRight, tabPadding);
             textSize = typedArray.getDimensionPixelSize(R.styleable.TabsView_textSize, 12);
             textColor = typedArray.getColor(R.styleable.TabsView_textColor, Color.BLACK);
             selectorHeight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorHeight, 1);
@@ -137,8 +144,8 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
 
     // Create Tab
     private TabView createTab(TabItem tabItem, int tabWidth, boolean selected) {
-        TabView tabView = new TabView(getContext(), tabItem, tabWidth, tabPadding, textSize, textColor,
-                selectorHeight, selectorColor);
+        TabView tabView = new TabView(getContext(), tabItem, tabWidth, tabPaddingTop, tabPaddingBottom,
+                tabPaddingLeft, tabPaddingRight, textSize, textColor, selectorHeight, selectorColor);
         tabView.setSelected(selected);
         tabView.setOnTabPressedListener(this);
 

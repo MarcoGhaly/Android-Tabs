@@ -20,12 +20,18 @@ class TabView implements View.OnClickListener {
     }
 
 
+    private static final int TEXT_VIEW_VERTICAL_MARGIN_DP = 4;
+
+
     private AtomicInteger atomicInteger = new AtomicInteger(1);
 
     private Context context;
     private TabItem tabItem;
     private int tabWidth;
-    private int padding;
+    private int paddingTop;
+    private int paddingBottom;
+    private int paddingLeft;
+    private int paddingRight;
     private int textSize;
     private int textColor;
     private int selectorHeight;
@@ -40,12 +46,16 @@ class TabView implements View.OnClickListener {
 
 
     // Constructor
-    public TabView(Context context, TabItem tabItem, int tabWidth, int padding, int textSize, int textColor,
-                   int selectorHeight, int selectorColor) {
+    public TabView(Context context, TabItem tabItem, int tabWidth, int paddingTop, int paddingBottom,
+                   int paddingLeft, int paddingRight, int textSize, int textColor, int selectorHeight,
+                   int selectorColor) {
         this.context = context;
         this.tabItem = tabItem;
         this.tabWidth = tabWidth;
-        this.padding = padding;
+        this.paddingTop = paddingTop;
+        this.paddingBottom = paddingBottom;
+        this.paddingLeft = paddingLeft;
+        this.paddingRight = paddingRight;
         this.textSize = textSize;
         this.textColor = textColor;
         this.selectorHeight = selectorHeight;
@@ -54,13 +64,12 @@ class TabView implements View.OnClickListener {
         initViews();
     }
 
-
     // Initialize Views
     private void initViews() {
         // Parent Layout
         relativeLayout_tab = new RelativeLayout(context);
         relativeLayout_tab.setLayoutParams(new LinearLayout.LayoutParams(tabWidth, LinearLayout.LayoutParams.MATCH_PARENT));
-        relativeLayout_tab.setPadding(padding, padding, padding, padding);
+        relativeLayout_tab.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
         relativeLayout_tab.setOnClickListener(this);
 
         // Selector
@@ -74,11 +83,12 @@ class TabView implements View.OnClickListener {
         selector.setBackgroundColor(selectorColor);
         selector.setVisibility(View.INVISIBLE);
 
-        // Button
+        // Text
         int buttonHeight = tabItem.getIconID() == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT;
         RelativeLayout.LayoutParams titleParams =
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, buttonHeight);
-//        titleParams.setMargins(0, padding, 0, padding);
+        int textViewVerticalMargin = Utils.dpToPx(context, TEXT_VIEW_VERTICAL_MARGIN_DP);
+        titleParams.setMargins(0, textViewVerticalMargin, 0, textViewVerticalMargin);
         titleParams.addRule(RelativeLayout.ABOVE, selector.getId());
         if (tabItem.getIconID() == 0) {
             titleParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
