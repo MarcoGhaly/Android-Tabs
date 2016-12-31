@@ -16,7 +16,7 @@
         app:separatorColor="@android:color/white"
         app:separatorWidth="0dp"
         app:tabPadding="4dp"
-        app:tabsPerPage="3"
+        app:tabsPerPage="4"
         app:textColor="@android:color/white"
         app:textSize="15sp" />
 

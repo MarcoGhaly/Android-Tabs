@@ -6,19 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ContentFragment extends Fragment {
 
-    private static final String ARGUMENT_ICON_ID = "Icon ID";
     private static final String ARGUMENT_TITLE = "Title";
 
 
     // New Instance
-    public static ContentFragment newInstance(int iconID, String title) {
+    public static ContentFragment newInstance(String title) {
         Bundle arguments = new Bundle();
-        arguments.putInt(ARGUMENT_ICON_ID, iconID);
         arguments.putString(ARGUMENT_TITLE, title);
 
         ContentFragment contentFragment = new ContentFragment();
@@ -27,11 +24,8 @@ public class ContentFragment extends Fragment {
     }
 
 
-    private int iconID;
-    private String title;
-
-    private ImageView imageView_icon;
     private TextView textView_title;
+    private String title;
 
 
     @Override
@@ -41,7 +35,6 @@ public class ContentFragment extends Fragment {
         setRetainInstance(true);
 
         Bundle arguments = getArguments();
-        iconID = arguments.getInt(ARGUMENT_ICON_ID);
         title = arguments.getString(ARGUMENT_TITLE);
     }
 
@@ -55,10 +48,8 @@ public class ContentFragment extends Fragment {
 
     // Initialize Views
     private void initViews(View rootView) {
-        imageView_icon = (ImageView) rootView.findViewById(R.id.imageView_icon);
         textView_title = (TextView) rootView.findViewById(R.id.textView_title);
 
-        imageView_icon.setImageResource(iconID);
         textView_title.setText(title);
     }
 

@@ -1,6 +1,9 @@
 package com.marco.tabs;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -9,8 +12,15 @@ import com.marco.tabs.tabs.TabsView;
 
 public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSelectedListener {
 
-    private String[] titles;
-    private int[] iconsResourceIDs;
+    private String[] titles = {"Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5", "Tab 6", "Tab 7", "Tab 8"};
+
+    private int[] iconsResourceIDs = {R.drawable.ic_tab_1,
+            R.drawable.ic_tab_2,
+            R.drawable.ic_tab_3,
+            R.drawable.ic_tab_4,
+            R.drawable.ic_tab_5,
+            R.drawable.ic_tab_6,
+            R.drawable.ic_tab_7, R.drawable.ic_tab_8};
 
     private TabsView tabsView;
     private ViewPager viewPager;
@@ -20,16 +30,6 @@ public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
-
-        titles = new String[3];
-        titles[0] = getString(R.string.photos);
-        titles[1] = getString(R.string.songs);
-        titles[2] = getString(R.string.videos);
-
-        iconsResourceIDs = new int[3];
-        iconsResourceIDs[0] = R.drawable.photos_selected;
-        iconsResourceIDs[1] = R.drawable.songs_selected;
-        iconsResourceIDs[2] = R.drawable.videos_selected;
 
         initViews();
     }
@@ -68,7 +68,7 @@ public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSel
 
         @Override
         public int getCount() {
-            return 3;
+            return titles.length;
         }
 
         @Override
@@ -82,5 +82,40 @@ public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSel
         }
 
     };
+
+
+    // Fragments Adapter
+    private class PagerAdapter extends FragmentStatePagerAdapter {
+
+        private String[] titles;
+
+        private ContentFragment[] contentFragments;
+
+
+        // Constructor
+        public PagerAdapter(FragmentManager fragmentManager, String[] titles, int[] iconsResourceIDs) {
+            super(fragmentManager);
+
+            this.titles = titles;
+            contentFragments = new ContentFragment[titles.length];
+        }
+
+
+        @Override
+        public int getCount() {
+            return titles.length;
+        }
+
+
+        @Override
+        public Fragment getItem(int position) {
+            if (contentFragments[position] == null) {
+                contentFragments[position] = ContentFragment.newInstance(titles[position]);
+            }
+
+            return contentFragments[position];
+        }
+
+    }
 
 }
