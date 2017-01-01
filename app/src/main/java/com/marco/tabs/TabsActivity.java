@@ -12,7 +12,7 @@ import com.marco.tabs.tabs.TabsView;
 
 public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSelectedListener {
 
-    private String[] titles = {"Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5", "Tab 6", "Tab 7", "Tab 8"};
+    private String[] titles;
 
     private int[] iconsResourceIDs = {R.drawable.ic_tab_1,
             R.drawable.ic_tab_2,
@@ -30,6 +30,8 @@ public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
+
+        titles = getResources().getStringArray(R.array.tabs);
 
         initViews();
     }
@@ -72,7 +74,7 @@ public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSel
         }
 
         @Override
-        public String getTitle(int position) {
+        public String getText(int position) {
             return titles[position];
         }
 

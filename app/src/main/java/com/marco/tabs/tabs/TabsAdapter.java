@@ -4,7 +4,7 @@ public interface TabsAdapter {
 
     int getCount();
 
-    String getTitle(int position);
+    String getText(int position);
 
     int getIconResourceID(int position);
 

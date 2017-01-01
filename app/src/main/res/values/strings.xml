@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Tabs</string>
 
-    <string name="photos">Photos</string>
-    <string name="songs">Songs</string>
-    <string name="videos">Videos</string>
+    <string-array name="tabs">
+        <item>Tab 1</item>
+        <item>Tab 2</item>
+        <item>Tab 3</item>
+        <item>Tab 4</item>
+        <item>Tab 5</item>
+        <item>Tab 6</item>
+        <item>Tab 7</item>
+        <item>Tab 8</item>
+    </string-array>
 </resources>

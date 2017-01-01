@@ -81,7 +81,7 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
     private void initViews() {
         final TabItem[] tabItems = new TabItem[adapter.getCount()];
         for (int i = 0; i < tabItems.length; i++) {
-            tabItems[i] = new TabItem(adapter.getIconResourceID(i), adapter.getTitle(i));
+            tabItems[i] = new TabItem(adapter.getIconResourceID(i), adapter.getText(i));
         }
 
         this.setHorizontalScrollBarEnabled(false);
