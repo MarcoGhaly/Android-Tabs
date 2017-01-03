@@ -29,14 +29,22 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
     private int selectedTabIndex;
 
     private int tabsPerPage;
-    private int tabPaddingTop;
-    private int tabPaddingBottom;
-    private int tabPaddingLeft;
-    private int tabPaddingRight;
+    private int iconMarginLeft;
+    private int iconMarginTop;
+    private int iconMarginRight;
+    private int iconMarginBottom;
     private int textSize;
     private int textColor;
+    private int textMarginLeft;
+    private int textMarginTop;
+    private int textMarginRight;
+    private int textMarginBottom;
     private int selectorHeight;
     private int selectorColor;
+    private int selectorMarginLeft;
+    private int selectorMarginTop;
+    private int selectorMarginRight;
+    private int selectorMarginBottom;
     private int separatorWidth;
     private int separatorColor;
 
@@ -54,16 +62,24 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
 
         try {
             tabsPerPage = typedArray.getInteger(R.styleable.TabsView_tabsPerPage, 0);
-            int tabPadding = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPadding, 0);
-            tabPaddingTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingTop, tabPadding);
-            tabPaddingBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingBottom, tabPadding);
-            tabPaddingLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingLeft, tabPadding);
-            tabPaddingRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPaddingRight, tabPadding);
+//            int tabPadding = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPadding, 0);
+            iconMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginLeft, 0);
+            iconMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginTop, 0);
+            iconMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginRight, 0);
+            iconMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginBottom, 0);
             textSize = typedArray.getDimensionPixelSize(R.styleable.TabsView_textSize, 12);
             textColor = typedArray.getColor(R.styleable.TabsView_textColor, Color.BLACK);
+            textMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginLeft, 0);
+            textMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginTop, 0);
+            textMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginRight, 0);
+            textMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginBottom, 0);
             selectorHeight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorHeight, 1);
             selectorColor = typedArray.getColor(R.styleable.TabsView_selectorColor, Color.BLACK);
             separatorWidth = typedArray.getDimensionPixelSize(R.styleable.TabsView_separatorWidth, 1);
+            selectorMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginLeft, 0);
+            selectorMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginTop, 0);
+            selectorMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginRight, 0);
+            selectorMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginBottom, 0);
             separatorColor = typedArray.getColor(R.styleable.TabsView_separatorColor, Color.BLACK);
         } finally {
             typedArray.recycle();
@@ -144,8 +160,12 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
 
     // Create Tab
     private TabView createTab(TabItem tabItem, int tabWidth, boolean selected) {
-        TabView tabView = new TabView(getContext(), tabItem, tabWidth, tabPaddingTop, tabPaddingBottom,
-                tabPaddingLeft, tabPaddingRight, textSize, textColor, selectorHeight, selectorColor);
+        int[] iconMargins = {iconMarginLeft, iconMarginTop, iconMarginRight, iconMarginBottom};
+        int[] textMargins = {textMarginLeft, textMarginTop, textMarginRight, textMarginBottom};
+        int[] selectorMargins = {selectorMarginLeft, selectorMarginTop, selectorMarginRight, selectorMarginBottom};
+
+        TabView tabView = new TabView(getContext(), tabItem, tabWidth, textSize, textColor,
+                selectorHeight, selectorColor, iconMargins, textMargins, selectorMargins);
         tabView.setSelected(selected);
         tabView.setOnTabPressedListener(this);
 
