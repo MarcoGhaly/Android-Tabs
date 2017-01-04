@@ -63,25 +63,27 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
 
         try {
             tabsPerPage = typedArray.getInteger(R.styleable.TabsView_tabsPerPage, 0);
-//            int tabPadding = typedArray.getDimensionPixelSize(R.styleable.TabsView_tabPadding, 0);
-            iconMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginLeft, 0);
-            iconMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginTop, 0);
-            iconMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginRight, 0);
-            iconMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginBottom, 0);
+            int iconMargin = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMargin, 0);
+            iconMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginLeft, iconMargin);
+            iconMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginTop, iconMargin);
+            iconMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginRight, iconMargin);
+            iconMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_iconMarginBottom, iconMargin);
             textSize = typedArray.getDimensionPixelSize(R.styleable.TabsView_textSize, 12);
             textColor = typedArray.getColor(R.styleable.TabsView_textColor, Color.BLACK);
-            textMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginLeft, 0);
-            textMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginTop, 0);
-            textMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginRight, 0);
-            textMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginBottom, 0);
+            int textMargin = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMargin, 0);
+            textMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginLeft, textMargin);
+            textMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginTop, textMargin);
+            textMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginRight, textMargin);
+            textMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginBottom, textMargin);
             selectorWeight = typedArray.getFraction(R.styleable.TabsView_selectorWeight, 1, 1, 1);
             selectorHeight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorHeight, 0);
             selectorColor = typedArray.getColor(R.styleable.TabsView_selectorColor, Color.BLACK);
             separatorWidth = typedArray.getDimensionPixelSize(R.styleable.TabsView_separatorWidth, 0);
-            selectorMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginLeft, 0);
-            selectorMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginTop, 0);
-            selectorMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginRight, 0);
-            selectorMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginBottom, 0);
+            int selectorMargin = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMargin, 0);
+            selectorMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginLeft, selectorMargin);
+            selectorMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginTop, selectorMargin);
+            selectorMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginRight, selectorMargin);
+            selectorMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginBottom, selectorMargin);
             separatorColor = typedArray.getColor(R.styleable.TabsView_separatorColor, Color.BLACK);
         } finally {
             typedArray.recycle();

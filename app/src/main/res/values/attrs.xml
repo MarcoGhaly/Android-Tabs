@@ -2,12 +2,14 @@
 <resources>
     <declare-styleable name="TabsView">
         <attr name="tabsPerPage" format="integer" />
+        <attr name="iconMargin" format="dimension" />
         <attr name="iconMarginLeft" format="dimension" />
         <attr name="iconMarginTop" format="dimension" />
         <attr name="iconMarginRight" format="dimension" />
         <attr name="iconMarginBottom" format="dimension" />
         <attr name="textSize" format="dimension" />
         <attr name="textColor" format="color" />
+        <attr name="textMargin" format="dimension" />
         <attr name="textMarginLeft" format="dimension" />
         <attr name="textMarginTop" format="dimension" />
         <attr name="textMarginRight" format="dimension" />
@@ -15,6 +17,7 @@
         <attr name="selectorWeight" format="fraction" />
         <attr name="selectorHeight" format="dimension" />
         <attr name="selectorColor" format="color" />
+        <attr name="selectorMargin" format="dimension" />
         <attr name="selectorMarginLeft" format="dimension" />
         <attr name="selectorMarginTop" format="dimension" />
         <attr name="selectorMarginRight" format="dimension" />
