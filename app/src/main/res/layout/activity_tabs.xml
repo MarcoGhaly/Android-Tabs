@@ -17,6 +17,7 @@
         app:selectorColor="@android:color/white"
         app:selectorHeight="4dp"
         app:selectorMarginBottom="2dp"
+        app:selectorWeight="90%"
         app:separatorColor="@android:color/white"
         app:separatorWidth="0dp"
         app:tabsPerPage="4"

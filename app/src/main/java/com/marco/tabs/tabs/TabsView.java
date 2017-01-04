@@ -39,6 +39,7 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
     private int textMarginTop;
     private int textMarginRight;
     private int textMarginBottom;
+    private float selectorWeight;
     private int selectorHeight;
     private int selectorColor;
     private int selectorMarginLeft;
@@ -73,9 +74,10 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
             textMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginTop, 0);
             textMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginRight, 0);
             textMarginBottom = typedArray.getDimensionPixelSize(R.styleable.TabsView_textMarginBottom, 0);
-            selectorHeight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorHeight, 1);
+            selectorWeight = typedArray.getFraction(R.styleable.TabsView_selectorWeight, 1, 1, 1);
+            selectorHeight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorHeight, 0);
             selectorColor = typedArray.getColor(R.styleable.TabsView_selectorColor, Color.BLACK);
-            separatorWidth = typedArray.getDimensionPixelSize(R.styleable.TabsView_separatorWidth, 1);
+            separatorWidth = typedArray.getDimensionPixelSize(R.styleable.TabsView_separatorWidth, 0);
             selectorMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginLeft, 0);
             selectorMarginTop = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginTop, 0);
             selectorMarginRight = typedArray.getDimensionPixelSize(R.styleable.TabsView_selectorMarginRight, 0);
@@ -165,7 +167,7 @@ public class TabsView extends HorizontalScrollView implements TabView.OnTabPress
         int[] selectorMargins = {selectorMarginLeft, selectorMarginTop, selectorMarginRight, selectorMarginBottom};
 
         TabView tabView = new TabView(getContext(), tabItem, tabWidth, textSize, textColor,
-                selectorHeight, selectorColor, iconMargins, textMargins, selectorMargins);
+                selectorWeight, selectorHeight, selectorColor, iconMargins, textMargins, selectorMargins);
         tabView.setSelected(selected);
         tabView.setOnTabPressedListener(this);
 

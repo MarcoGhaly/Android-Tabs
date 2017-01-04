@@ -27,6 +27,7 @@ class TabView implements View.OnClickListener {
     private int tabWidth;
     private int textSize;
     private int textColor;
+    private float selectorWeight;
     private int selectorHeight;
     private int selectorColor;
 
@@ -44,13 +45,14 @@ class TabView implements View.OnClickListener {
 
     // Constructor
     public TabView(Context context, TabItem tabItem, int tabWidth, int textSize, int textColor,
-                   int selectorHeight, int selectorColor, int[] iconMargins, int[] textMargins,
-                   int[] selectorMargins) {
+                   float selectorWeight, int selectorHeight, int selectorColor, int[] iconMargins,
+                   int[] textMargins, int[] selectorMargins) {
         this.context = context;
         this.tabItem = tabItem;
         this.tabWidth = tabWidth;
         this.textSize = textSize;
         this.textColor = textColor;
+        this.selectorWeight = selectorWeight;
         this.selectorHeight = selectorHeight;
         this.selectorColor = selectorColor;
         this.iconMargins = iconMargins;
@@ -69,10 +71,11 @@ class TabView implements View.OnClickListener {
         relativeLayout_tab.setOnClickListener(this);
 
         // Selector
-        RelativeLayout.LayoutParams selectorParams = new RelativeLayout.LayoutParams
-                (RelativeLayout.LayoutParams.MATCH_PARENT, selectorHeight);
+        int selectorWidth = (int) (tabWidth * selectorWeight);
+        RelativeLayout.LayoutParams selectorParams = new RelativeLayout.LayoutParams(selectorWidth, selectorHeight);
         selectorParams.setMargins(selectorMargins[0], selectorMargins[1], selectorMargins[2], selectorMargins[3]);
         selectorParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        selectorParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
         selector = new View(context);
         selector.setId(generateViewID());

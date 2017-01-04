@@ -1,11 +1,13 @@
 package com.marco.tabs.tabs;
 
-public interface TabsAdapter {
+public abstract class TabsAdapter {
 
-    int getCount();
+    public abstract int getCount();
 
-    String getText(int position);
+    public abstract String getText(int position);
 
-    int getIconResourceID(int position);
+    public int getIconResourceID(int position) {
+        return 0;
+    }
 
 }
