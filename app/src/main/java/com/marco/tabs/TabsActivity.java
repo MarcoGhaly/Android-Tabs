@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.marco.tabs.tabs.FragmentsPagerAdapter;
 import com.marco.tabs.tabs.TabsView;
 
 public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSelectedListener {

@@ -1,10 +1,8 @@
-package com.marco.tabs.tabs;
+package com.marco.tabs;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-
-import com.marco.tabs.ContentFragment;
 
 public class FragmentsPagerAdapter extends FragmentStatePagerAdapter {
 
