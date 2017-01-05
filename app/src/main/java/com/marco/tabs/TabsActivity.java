@@ -1,13 +1,10 @@
 package com.marco.tabs;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.marco.tabs.tabs.TabsAdapter;
+import com.marco.tabs.tabs.FragmentsPagerAdapter;
 import com.marco.tabs.tabs.TabsView;
 
 public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSelectedListener {
@@ -40,12 +37,12 @@ public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSel
     // Initialize Views
     private void initViews() {
         tabsView = (TabsView) findViewById(R.id.view_tabs);
-        tabsView.setAdapter(tabsAdapter);
+        tabsView.setAdapter(new CustomTabsAdapter(titles, iconsResourceIDs));
         tabsView.setOnTabSelectedListener(this);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), titles, iconsResourceIDs);
-        viewPager.setAdapter(pagerAdapter);
+        FragmentsPagerAdapter fragmentsPagerAdapter = new FragmentsPagerAdapter(getSupportFragmentManager(), titles);
+        viewPager.setAdapter(fragmentsPagerAdapter);
         viewPager.addOnPageChangeListener(simpleOnPageChangeListener);
     }
 
@@ -63,61 +60,5 @@ public class TabsActivity extends AppCompatActivity implements TabsView.OnTabSel
             tabsView.setSelectedTab(position);
         }
     };
-
-
-    // Tabs Adapter
-    private TabsAdapter tabsAdapter = new TabsAdapter() {
-
-        @Override
-        public int getCount() {
-            return titles.length;
-        }
-
-        @Override
-        public String getText(int position) {
-            return titles[position];
-        }
-
-        @Override
-        public int getIconResourceID(int position) {
-            return iconsResourceIDs[position];
-        }
-
-    };
-
-
-    // Fragments Adapter
-    private class PagerAdapter extends FragmentStatePagerAdapter {
-
-        private String[] titles;
-
-        private ContentFragment[] contentFragments;
-
-
-        // Constructor
-        public PagerAdapter(FragmentManager fragmentManager, String[] titles, int[] iconsResourceIDs) {
-            super(fragmentManager);
-
-            this.titles = titles;
-            contentFragments = new ContentFragment[titles.length];
-        }
-
-
-        @Override
-        public int getCount() {
-            return titles.length;
-        }
-
-
-        @Override
-        public Fragment getItem(int position) {
-            if (contentFragments[position] == null) {
-                contentFragments[position] = ContentFragment.newInstance(titles[position]);
-            }
-
-            return contentFragments[position];
-        }
-
-    }
 
 }
